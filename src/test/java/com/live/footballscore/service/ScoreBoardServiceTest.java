@@ -1,6 +1,7 @@
 package com.live.footballscore.service;
 
 import com.live.footballscore.dto.MatchDto;
+import com.live.footballscore.dto.ScoreDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,11 +20,22 @@ class ScoreBoardServiceTest {
 
     @Test
     void finishMatch_shouldRemoveMatchFromScoreboard() {
-        List<MatchDto> matches;
         ScoreBoardServiceImpl scoreboard = new ScoreBoardServiceImpl();
-        matches = scoreboard.startMatch("Mexico", "Canada");
-        matches = scoreboard.finishMatch("Mexico", "Canada");
+        scoreboard.startMatch("Mexico", "Canada");
+        List<MatchDto> matches = scoreboard.finishMatch("Mexico", "Canada");
 
         assertEquals(0, matches.size());
+    }
+
+    @Test
+    void updateScore_shouldUpdateMatchScore() {
+        ScoreBoardServiceImpl scoreboard = new ScoreBoardServiceImpl();
+        scoreboard.startMatch("Mexico", "Canada");
+
+        ScoreDto score = new ScoreDto(0, 5);
+        List<MatchDto> matches = scoreboard.updateScore("Mexico", "Canada", score);
+
+        assertEquals(0, matches.get(0).getHomeTeamScore());
+        assertEquals(5, matches.get(0).getAwayTeamScore());
     }
 }

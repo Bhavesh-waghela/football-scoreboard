@@ -12,4 +12,9 @@ public class MatchDto {
     private String awayTeam;
     private int homeTeamScore;
     private int awayTeamScore;
+
+    public void updateScores(int newHomeTeamScore, int newAwayTeamScore) {
+        this.homeTeamScore = newHomeTeamScore;
+        this.awayTeamScore = newAwayTeamScore;
+    }
 }
