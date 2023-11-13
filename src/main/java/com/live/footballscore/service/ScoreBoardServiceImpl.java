@@ -18,4 +18,10 @@ public class ScoreBoardServiceImpl implements ScoreBoardService{
         matches.add(match);
         return matches;
     }
+
+    @Override
+    public List<MatchDto> finishMatch(String homeTeam, String awayTeam) {
+        matches.removeIf(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam));
+        return matches;
+    }
 }

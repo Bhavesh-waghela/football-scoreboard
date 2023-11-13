@@ -17,4 +17,13 @@ class ScoreBoardServiceTest {
         assertEquals(1, matches.size());
     }
 
+    @Test
+    void finishMatch_shouldRemoveMatchFromScoreboard() {
+        List<MatchDto> matches;
+        ScoreBoardServiceImpl scoreboard = new ScoreBoardServiceImpl();
+        matches = scoreboard.startMatch("Mexico", "Canada");
+        matches = scoreboard.finishMatch("Mexico", "Canada");
+
+        assertEquals(0, matches.size());
+    }
 }
