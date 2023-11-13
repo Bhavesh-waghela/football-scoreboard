@@ -3,10 +3,7 @@ package com.live.footballscore.service;
 import com.live.footballscore.dto.MatchDto;
 import com.live.footballscore.dto.ScoreDto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 public class ScoreBoardServiceImpl implements ScoreBoardService{
     private List<MatchDto> matches;
@@ -36,5 +33,12 @@ public class ScoreBoardServiceImpl implements ScoreBoardService{
                 .updateScores(score.getHomeTeamScore(), score.getAwayTeamScore());
 
         return matches;
+    }
+
+    @Override
+    public List<MatchDto> getMatchesSummary() {
+        List<MatchDto> summary = new ArrayList<>(matches);
+        summary.sort(Comparator.comparing(MatchDto::getTotalScore).reversed());
+        return summary;
     }
 }

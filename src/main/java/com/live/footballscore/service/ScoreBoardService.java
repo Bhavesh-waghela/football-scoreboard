@@ -9,4 +9,5 @@ public interface ScoreBoardService {
     List<MatchDto> startMatch(String homeTeam, String awayTeam);
     List<MatchDto> finishMatch(String homeTeam, String awayTeam);
     List<MatchDto> updateScore(String homeTeam, String awayTeam, ScoreDto score);
+    List<MatchDto> getMatchesSummary();
 }

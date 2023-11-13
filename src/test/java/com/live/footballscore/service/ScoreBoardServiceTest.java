@@ -38,4 +38,18 @@ class ScoreBoardServiceTest {
         assertEquals(0, matches.get(0).getHomeTeamScore());
         assertEquals(5, matches.get(0).getAwayTeamScore());
     }
+
+    @Test
+    void getMatchesSummary_shouldReturnMatches() {
+        ScoreBoardServiceImpl scoreboard = new ScoreBoardServiceImpl();
+        scoreboard.startMatch("TeamA", "TeamB");
+        scoreboard.startMatch("TeamC", "TeamD");
+        scoreboard.updateScore("TeamA", "TeamB", new ScoreDto(2, 3));
+        scoreboard.updateScore("TeamC", "TeamD", new ScoreDto(3, 4));
+
+        assertEquals(2, scoreboard.getMatchesSummary().size());
+        assertEquals("TeamC", scoreboard.getMatchesSummary().get(0).getHomeTeam());
+        assertEquals("TeamD", scoreboard.getMatchesSummary().get(0).getAwayTeam());
+        assertEquals(7, scoreboard.getMatchesSummary().get(0).getTotalScore());
+    }
 }

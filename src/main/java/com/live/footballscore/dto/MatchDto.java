@@ -17,4 +17,8 @@ public class MatchDto {
         this.homeTeamScore = newHomeTeamScore;
         this.awayTeamScore = newAwayTeamScore;
     }
+
+    public int getTotalScore() {
+        return homeTeamScore + awayTeamScore;
+    }
 }
