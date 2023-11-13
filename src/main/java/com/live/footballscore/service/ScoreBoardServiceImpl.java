@@ -3,6 +3,7 @@ package com.live.footballscore.service;
 import com.live.footballscore.dto.MatchDto;
 import com.live.footballscore.dto.ScoreDto;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ScoreBoardServiceImpl implements ScoreBoardService{
@@ -13,7 +14,7 @@ public class ScoreBoardServiceImpl implements ScoreBoardService{
     }
     @Override
     public List<MatchDto> startMatch(String homeTeam, String awayTeam) {
-        MatchDto match = new MatchDto(homeTeam, awayTeam, 0, 0);
+        MatchDto match = new MatchDto(homeTeam, awayTeam, 0, 0, LocalDateTime.now());
         matches.add(match);
         return matches;
     }
@@ -38,7 +39,10 @@ public class ScoreBoardServiceImpl implements ScoreBoardService{
     @Override
     public List<MatchDto> getMatchesSummary() {
         List<MatchDto> summary = new ArrayList<>(matches);
-        summary.sort(Comparator.comparing(MatchDto::getTotalScore).reversed());
+        summary.sort(
+                Comparator.comparing(MatchDto::getTotalScore).reversed()
+                        .thenComparing(Comparator.comparing(MatchDto::getStartTime).reversed())
+        );
         return summary;
     }
 }

@@ -10,7 +10,7 @@ class MatchDtoTest {
 
     @Test
     void shouldAddFieldsToTheMatch() {
-        MatchDto match = new MatchDto("TeamA", "TeamB", 2, 3);
+        MatchDto match = new MatchDto("TeamA", "TeamB", 2, 3, LocalDateTime.now());
 
         assertEquals("TeamA", match.getHomeTeam());
         assertEquals("TeamB", match.getAwayTeam());
